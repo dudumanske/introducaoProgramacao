@@ -46,10 +46,14 @@ public class JogoDaVelha {
             if (sorte == 1) {          
                 do {
                     System.out.println("Jogador ..");
-                    System.out.println("  linha:");
-                    l = tec.nextInt();
-                    System.out.println("  coluna:");
-                    c = tec.nextInt();
+                    do {
+                        System.out.println("  linha:");
+                        l = tec.nextInt();   
+                    } while (l < 0 || l > 2);
+                    do {
+                        System.out.println("  coluna:");
+                        c = tec.nextInt();                      
+                    } while (c < 0 || c > 2);                                       
                     lugar = jogar(l, c, 'X', mapa);
                 } while (lugar != true);
                 jogada++;
@@ -65,7 +69,7 @@ public class JogoDaVelha {
                     jogada++;
                     desenha(jogada, mapa);
                     ganhador = ganhou('O', mapa);
-                } else {
+                } else if (ganhador == false && jogada == 9){
                     ganhador = true;
                     jogada++;
                 }            
@@ -82,23 +86,27 @@ public class JogoDaVelha {
                 if (ganhador == false && jogada != 9) {
                     do {
                         System.out.println("Jogador ..");
-                        System.out.println("  linha:");
-                        l = tec.nextInt();
-                        System.out.println("  coluna:");
-                        c = tec.nextInt();
+                        do {
+                            System.out.println("  linha:");
+                            l = tec.nextInt();                          
+                        } while (l < 0 || l > 2);
+                        do {
+                            System.out.println("  coluna:");
+                            c = tec.nextInt();                          
+                        } while (c < 0 || c > 2); 
                         lugar = jogar(l, c, 'X', mapa);
                     } while (lugar != true);
                     jogada++;
                     desenha(jogada, mapa);
                     ganhador = ganhou('X', mapa);
-                } else {
+                } else if (ganhador == false && jogada == 9) {
                     ganhador = true;
                     jogada++;
                 }         
             }    
         } while (ganhador != true);
-        if (jogada == 10 && ganhador == true) {
-            System.out.println("... EMPATOU!");
+        if (jogada == 10) {
+            System.out.println("... EMPATOU!\n");
         }
     }
 
@@ -113,11 +121,11 @@ public class JogoDaVelha {
     }
 
     private boolean ganhou(char jogador, char mapa[][]){
-        if ((mapa[0][0] == jogador && mapa[0][1] == jogador && mapa[0][2] == jogador) || (mapa[1][0] == jogador && mapa[1][1] == jogador && mapa[1][2] == jogador) || (mapa[2][0] == jogador && mapa[2][1] == jogador && mapa[2][2] == jogador) || (mapa[0][0] == jogador && mapa[1][0] == jogador && mapa[2][0] == jogador) || (mapa[0][1] == jogador && mapa[1][1] == jogador && mapa[2][1] == jogador) || (mapa[0][2] == jogador && mapa[1][2] == jogador && mapa[2][2] == jogador) || (mapa[0][0] == jogador && mapa[1][1] == jogador && mapa[2][2] == jogador) || (mapa[2][2] == jogador && mapa[1][1] == jogador && mapa[0][0] == jogador)) {
+        if ((mapa[0][0] == jogador && mapa[0][1] == jogador && mapa[0][2] == jogador) || (mapa[1][0] == jogador && mapa[1][1] == jogador && mapa[1][2] == jogador) || (mapa[2][0] == jogador && mapa[2][1] == jogador && mapa[2][2] == jogador) || (mapa[0][0] == jogador && mapa[1][0] == jogador && mapa[2][0] == jogador) || (mapa[0][1] == jogador && mapa[1][1] == jogador && mapa[2][1] == jogador) || (mapa[0][2] == jogador && mapa[1][2] == jogador && mapa[2][2] == jogador) || (mapa[0][0] == jogador && mapa[1][1] == jogador && mapa[2][2] == jogador) || (mapa[0][2] == jogador && mapa[1][1] == jogador && mapa[2][0] == jogador)) {
             if (jogador == 'X') {
-                System.out.println("... Jogador GANHOU!");
+                System.out.println("... Jogador GANHOU!\n");
             } else {
-                System.out.println("... PC GANHOU!");
+                System.out.println("... PC GANHOU!\n");
             }
             return true;
         }
